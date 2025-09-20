@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "../Hooks/cartContext";
+import { getBazzarProductImage } from "../utils/productImages";
 
 
 const ProductPage = () => {
@@ -42,10 +43,13 @@ const ProductPage = () => {
             {/* Product Image */}
             <div className="relative w-full h-80 rounded-lg overflow-hidden">
                 <img 
-                    src={product.image} 
+                    src={product.image || getBazzarProductImage(product.name)} 
                     alt={product.name} 
                     fill="true" 
                     className="object-cover"
+                    onError={(e) => {
+                        e.target.src = getBazzarProductImage(product.name);
+                    }}
                 />
             </div>
 

@@ -17,9 +17,14 @@ export default function Page() {
                         <div className="flex flex-col justify-center items-center md:items-start text-center md:text-left px-4 sm:px-6 md:p-8 mt-20 md:mt-0">
                             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-2">कृषि क्रांति में शामिल</h1>
                             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black mb-6">हों</h1>
-                            <Link href='/auth/signup' id="ctaButton" className="bg-green-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg hover:bg-green-700 transition">
-                                Get started
-                            </Link>
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <Link href='/auth/signup' id="ctaButton" className="bg-green-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg hover:bg-green-700 transition text-center">
+                                    Get started
+                                </Link>
+                                <Link href='/auth/signup' className="bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg shadow-lg hover:bg-blue-700 transition text-center">
+                                    Join Now
+                                </Link>
+                            </div>
                         </div>
                 </div>
             </div>

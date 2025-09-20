@@ -1,6 +1,8 @@
-import React from 'react'
-import { Auth } from '@hook/authContext'
-import "./globals.css"
+
+import React from 'react';
+import { Auth } from '@hook/authContext';
+import "./globals.css";
+import Chatbot from './components/Chatbot';
 
 export default function RootLayout({ children }){
     return(
@@ -18,12 +20,14 @@ export default function RootLayout({ children }){
                 {/* Icon */}
                 <link rel='icon' href='/icon.png' />
                 {/* Title */}
-                <title>Gramid | Revolution in Agriculture</title></head>
-                <body>
-                    <Auth>
-                        { children }
-                    </Auth>
-                </body>
+                <title>Gramid | Revolution in Agriculture</title>
+            </head>
+            <body>
+                <Auth>
+                    { children }
+                </Auth>
+                <Chatbot />
+            </body>
         </html>
     )
 }

@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { getBazzarProductImage } from "./utils/productImages";
 
 export default function Page() {
     const [products, setProducts] = useState([]);
@@ -60,9 +61,12 @@ export default function Page() {
                                 // target="_blank"
                             >
                                 <img
-                                    src={product.image}
+                                    src={product.image || getBazzarProductImage(product.name)}
                                     alt={product.name}
                                     className="w-full h-44 object-cover mb-4"
+                                    onError={(e) => {
+                                        e.target.src = getBazzarProductImage(product.name);
+                                    }}
                                 />
                                 <div className="p-4">
                                     <div className="text-sm text-gray-500 mb-2">

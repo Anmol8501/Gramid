@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
+import { getProductImage } from "./assets/productImages";
 
 const DistrictSelector = () => {
   // Hard-coded arrays for demonstration.
   const [districts] = useState(["Mathura", "Aligarh", "Manipur"]);
-  const [products] = useState(["Wheat", "Rice", "Bajra", "Jowar", "Maize"]);
+  const [products] = useState(["Wheat", "Rice", "Bajra", "Jowar", "Maize", "Mango", "Tomato"]);
   const [show, setShow] = useState(false);
 
   // Selected values and messages
@@ -140,32 +141,26 @@ const DistrictSelector = () => {
           <div className="flex flex-wrap justify-center gap-5">
             {shopPrices.length > 0 ? (
               shopPrices.map((shop, index) => {
-                // If shop.img exists, check if it starts with "data:" already. 
-                // If not, prepend a Base64 JPEG prefix.
-                const imageUrl =
-                  shop.image && !shop.image.startsWith("data:")
+                // Get the appropriate image based on the product
+                const imageUrl = shop.productName 
+                  ? getProductImage(shop.productName)
+                  : (shop.image && !shop.image.startsWith("data:")
                     ? `data:image/jpeg;base64,${shop.image}`
-                    : shop.image;
+                    : shop.image);
 
                 return (
                   <div
                     key={index}
                     className="cursor-pointer flex flex-col border border-gray-200 rounded shadow-md text-center overflow-hidden hover:shadow-lg bg-gray-50 p-2"
                   >
-                    {/* Display the product image if available */}
-                    {shop.image ? (
-                      <div className="w-full h-40 overflow-hidden">
-                        <img
-                          src={imageUrl}
-                          alt={`${shop.name} image`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-full h-40 bg-gray-200 flex items-center justify-center">
-                        <span className="text-gray-500">No Image</span>
-                      </div>
-                    )}
+                    {/* Display the product image */}
+                    <div className="w-full h-40 overflow-hidden">
+                      <img
+                        src={imageUrl}
+                        alt={`${shop.productName || shop.name} image`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <div className="p-4 text-left">
                       <h3 className="text-lg font-semibold mb-2">{shop.name}</h3>
                       <p className="text-sm text-gray-600">Mandi: {shop.mandi}</p>

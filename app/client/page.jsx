@@ -69,32 +69,32 @@ export default function Page() {
                 </div>
 
                 <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-6 mt-6">
-                    <div className="bg-white rounded shadow-lg overflow-hidden">
+                    <Link href="/blog" className="bg-white rounded shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
                         <img src="images/blog/b1.jpg" alt="Startup" className="w-full h-48 object-cover" />
                         <div className="p-4">
-                            <h3 className="font-bold text-lg">AgroTech startup for Farmers of India | Make in India</h3>
+                            <h3 className="font-bold text-lg hover:text-green-600 transition-colors">AgroTech startup for Farmers of India | Make in India</h3>
                             <p className="text-gray-500 text-sm">Posted by admin Jan 2025</p>
-                            <p className="text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                            <p className="text-gray-700 mt-2">Discover how innovative startups are revolutionizing farming in India with cutting-edge technology and sustainable practices.</p>
                         </div>
-                    </div>
+                    </Link>
 
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <Link href="/ai/leaf" className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
                         <img src="images/blog/b2.jpg" alt="AI Disease Prevention" className="w-full h-48 object-cover" />
                         <div className="p-4">
-                            <h3 className="font-bold text-lg">Don't let disease take your profit use AI to fight back</h3>
+                            <h3 className="font-bold text-lg hover:text-green-600 transition-colors">Don't let disease take your profit use AI to fight back</h3>
                             <p className="text-gray-500 text-sm">Posted by admin Jan 2025</p>
-                            <p className="text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                            <p className="text-gray-700 mt-2">Learn how artificial intelligence is helping farmers detect and prevent crop diseases before they cause significant damage.</p>
                         </div>
-                    </div>
+                    </Link>
 
-                    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <Link href="/market" className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer">
                         <img src="images/blog/b3.jpg" alt="Best Rates" className="w-full h-48 object-cover" />
                         <div className="p-4">
-                            <h3 className="font-bold text-lg">Find the best Rate in your area and district</h3>
+                            <h3 className="font-bold text-lg hover:text-green-600 transition-colors">Find the best Rate in your area and district</h3>
                             <p className="text-gray-500 text-sm">Posted by admin Jan 2025</p>
-                            <p className="text-gray-700 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                            <p className="text-gray-700 mt-2">Get live market rates for agricultural products across different districts and mandis to maximize your profits.</p>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </section>
             <section className="bg-white py-10">

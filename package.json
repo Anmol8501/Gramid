@@ -10,6 +10,7 @@
   "author": "gourav-sharma",
   "license": "MIT",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "jsonwebtoken": "^9.0.2",
@@ -19,7 +20,8 @@
     "nodemailer": "^6.10.0",
     "qrcode.react": "^4.2.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",

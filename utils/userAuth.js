@@ -3,8 +3,9 @@
 export async function signUp(fields) {
     let result = {
         message: "",
-        status : 500
+        status: 500
     }
+    
     try {
         const response = await fetch('/api/authentication/signup', {
             method: 'POST',
@@ -15,25 +16,29 @@ export async function signUp(fields) {
         });
 
         const data = await response.json();
-        if(data.status === 200) {
+        
+        if (response.ok && data.status === 200) {
             result = data;
-        }else {
-            throw new Error(data.message);
+        } else {
+            result.message = data.message || 'Signup failed';
+            result.status = data.status || response.status;
         }
-    }catch (err) {
-        result.message = err.message;
+    } catch (err) {
+        console.error('Signup fetch error:', err);
+        result.message = 'Network error. Please check your connection.';
+        result.status = 500;
     }
-    finally {
-        return result;
-    }
+    
+    return result;
 }
 
 export async function logIn(fields) {
     let result = {
         message: "",
-        status : 500,
+        status: 500,
         user: null
     }
+    
     try {
         const response = await fetch('/api/authentication/login', {
             method: 'POST',
@@ -44,15 +49,18 @@ export async function logIn(fields) {
         });
 
         const data = await response.json();
-        if(data.status === 200) {
+        
+        if (response.ok && data.status === 200) {
             result = data;
-        }else {
-            throw new Error(data.message);
+        } else {
+            result.message = data.message || 'Login failed';
+            result.status = data.status || response.status;
         }
-    }catch (err) {
-        result.message = err.message;
+    } catch (err) {
+        console.error('Login fetch error:', err);
+        result.message = 'Network error. Please check your connection.';
+        result.status = 500;
     }
-    finally {
-        return result;
-    }
+    
+    return result;
 }

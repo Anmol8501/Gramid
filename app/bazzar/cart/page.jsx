@@ -1,6 +1,7 @@
 "use client";
 
 import { useCart } from "@cart/cartContext";
+import { getBazzarProductImage } from "../utils/productImages";
 
 const CartPage = () => {
     const { cart, removeFromCart, clearCart, addToCart, decreaseQuantity } = useCart();
@@ -17,11 +18,14 @@ const CartPage = () => {
                         <div key={item._id} className="flex items-center justify-between border-b py-4">
                             <div className="flex items-center gap-4">
                                 <img
-                                    src={item.image}
+                                    src={item.image || getBazzarProductImage(item.name)}
                                     alt={item.name}
                                     width={80}
                                     height={80}
                                     className="rounded"
+                                    onError={(e) => {
+                                        e.target.src = getBazzarProductImage(item.name);
+                                    }}
                                 />
                                 <div>
                                     <h2 className="font-semibold">{item.name}</h2>

@@ -18,6 +18,7 @@ export default function SignupForm() {
   const [otp, setOtp] = useState('');
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [devOtp, setDevOtp] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -59,7 +60,9 @@ export default function SignupForm() {
 
       if (response.ok) {
         setOtp(data.OTP);
+        setDevOtp(data.OTP);
         console.log('OTP:', data.OTP);
+        setMessage('OTP sent successfully! Check your email or console for development mode.');
         // Move to the next step
         setStep(2);
       } else {
@@ -83,13 +86,21 @@ export default function SignupForm() {
   };
 
   const submitForm = async () => {
-    const response = await signUp(formData);
-    if (response.status === 200) {
-      // onAuth(formData);
-      alert('User created successfully, now you can login');
-      route.push('/auth/login');
-    } else {
-      setMessage(response.message);
+    setLoading(true);
+    try {
+      const response = await signUp(formData);
+      if (response.status === 200) {
+        setMessage('User created successfully! You can now login.');
+        setTimeout(() => {
+          route.push('/auth/login');
+        }, 2000);
+      } else {
+        setMessage(response.message || 'Failed to create user');
+      }
+    } catch (error) {
+      setMessage('An error occurred while creating the user');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -108,7 +119,19 @@ export default function SignupForm() {
   return (
     <main className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="max-w-xs w-full p-6 bg-white">
-        {message && <p className="text-red-500">{message}</p>}
+        {process.env.NODE_ENV === 'development' && (
+          <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-4">
+            <strong>Development Mode:</strong> OTP will be logged to console instead of sending email.
+            <br />
+            <small>Using development database (in-memory storage)</small>
+            {devOtp && (
+              <div className="mt-2 p-2 bg-green-100 border border-green-400 rounded">
+                <strong>Your OTP Code:</strong> <span className="text-2xl font-bold text-green-800">{devOtp}</span>
+              </div>
+            )}
+          </div>
+        )}
+        {message && <p className={message.includes('successfully') ? 'text-green-500' : 'text-red-500'}>{message}</p>}
         {step === 1 ? (
           <form
             onSubmit={(e) => {

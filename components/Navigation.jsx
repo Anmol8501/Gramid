@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,82 +48,106 @@ const Navbar = () => {
             isMenuOpen ? "absolute top-16 right-6" : "hidden"
           } bg-white shadow-lg rounded-lg w-48 p-4 space-y-4 transition-all`}
         >
-                    <a
+          <Link
             href="/client"
-            className="text-gray-700 hover:text-blue-500 transition"
+            className="block text-gray-700 hover:text-blue-500 transition"
           >
             Home
-          </a>
-          <a
+          </Link>
+          <Link
             href="/bazzar"
             className="block text-gray-700 hover:text-blue-500 transition"
           >
             Bazzar
-          </a>
-          <a
+          </Link>
+          <Link
             href="/blog"
             className="block text-gray-700 hover:text-blue-500 transition"
           >
             Blog
-          </a>
-          <a
+          </Link>
+          <Link
             href="/reel"
             className="block text-gray-700 hover:text-blue-500 transition"
           >
             Reels
-          </a>
-          <a
-            href="/admin"
+          </Link>
+          <Link
+            href="/features"
             className="block text-gray-700 hover:text-blue-500 transition"
           >
             Features
-          </a>
-          <a
+          </Link>
+          <Link
+            href="/about"
+            className="block text-gray-700 hover:text-blue-500 transition"
+          >
+            About Us
+          </Link>
+          <Link
+            href="/help"
+            className="block text-gray-700 hover:text-blue-500 transition"
+          >
+            Help
+          </Link>
+          <Link
             href="/profile"
-            className="text-gray-700 hover:text-blue-500 transition"
+            className="block text-gray-700 hover:text-blue-500 transition"
           >
             Profile
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6 text-lg">
-        <a
+          <Link
             href="/client"
             className="text-gray-700 hover:text-blue-500 transition"
           >
             Home
-          </a>
-          <a
+          </Link>
+          <Link
             href="/bazzar"
             className="text-gray-700 hover:text-blue-500 transition"
           >
             Bazzar
-          </a>
-          <a
+          </Link>
+          <Link
             href="/blog"
             className="text-gray-700 hover:text-blue-500 transition"
           >
             Blog
-          </a>
-          <a
+          </Link>
+          <Link
             href="/reel"
-            className="block text-gray-700 hover:text-blue-500 transition"
+            className="text-gray-700 hover:text-blue-500 transition"
           >
             Reels
-          </a>
-          <a
-            href="/admin"
+          </Link>
+          <Link
+            href="/features"
             className="text-gray-700 hover:text-blue-500 transition"
           >
             Features
-          </a>
-          <a
+          </Link>
+          <Link
+            href="/about"
+            className="text-gray-700 hover:text-blue-500 transition"
+          >
+            About Us
+          </Link>
+          <Link
+            href="/help"
+            className="text-gray-700 hover:text-blue-500 transition"
+          >
+            Help
+          </Link>
+          <Link
             href="/profile"
             className="text-gray-700 hover:text-blue-500 transition"
           >
             Profile
-          </a>
+          </Link>
         </nav>
       </div>
     </header>

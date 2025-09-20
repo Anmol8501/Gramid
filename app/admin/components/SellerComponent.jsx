@@ -1,6 +1,7 @@
 "use client"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { getSuggestedImageUrl, getProductImageSuggestions } from "../../bazzar/utils/productImages";
 
 export default function NewProduct({ id }) {
   // In a real-world scenario, you'd get the seller's user ID from your authentication context.
@@ -18,8 +19,16 @@ export default function NewProduct({ id }) {
     createdAt: "",
     seller_id: currentUserId,
   });
+  
+  const [imageSuggestions, setImageSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   const router = useRouter();
+
+  // Load image suggestions on component mount
+  useEffect(() => {
+    setImageSuggestions(getProductImageSuggestions());
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,6 +36,30 @@ export default function NewProduct({ id }) {
       ...prev,
       [name]: value,
     }));
+
+    // Auto-suggest image URL when name or category changes
+    if (name === "name" || name === "category") {
+      const suggestedUrl = getSuggestedImageUrl(
+        name === "name" ? value : formData.name,
+        name === "category" ? value : formData.category
+      );
+      
+      if (suggestedUrl && suggestedUrl !== "https://placehold.co/400x300") {
+        setFormData((prev) => ({
+          ...prev,
+          [name]: value,
+          image: suggestedUrl,
+        }));
+      }
+    }
+  };
+
+  const handleImageSuggestionClick = (suggestion) => {
+    setFormData((prev) => ({
+      ...prev,
+      image: suggestion.url,
+    }));
+    setShowSuggestions(false);
   };
 
   const handleSubmit = async (e) => {
@@ -134,16 +167,63 @@ export default function NewProduct({ id }) {
           <label htmlFor="image" className="block text-lg font-medium">
             Image URL
           </label>
-          <input
-            type="url"
-            id="image"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            className="mt-1 block w-full border border-gray-300 p-2 rounded"
-            placeholder="https://placehold.co/150x150"
-            required
-          />
+          <div className="relative">
+            <input
+              type="url"
+              id="image"
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
+              onFocus={() => setShowSuggestions(true)}
+              className="mt-1 block w-full border border-gray-300 p-2 rounded"
+              placeholder="https://placehold.co/150x150"
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowSuggestions(!showSuggestions)}
+              className="absolute right-2 top-3 text-blue-600 hover:text-blue-800"
+            >
+              📷
+            </button>
+          </div>
+          
+          {/* Image Preview */}
+          {formData.image && (
+            <div className="mt-2">
+              <img
+                src={formData.image}
+                alt="Product preview"
+                className="w-32 h-32 object-cover rounded border"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
+            </div>
+          )}
+          
+          {/* Image Suggestions */}
+          {showSuggestions && (
+            <div className="mt-2 p-3 border rounded bg-gray-50 max-h-60 overflow-y-auto">
+              <h4 className="font-medium text-sm text-gray-700 mb-2">Suggested Images:</h4>
+              <div className="grid grid-cols-2 gap-2">
+                {imageSuggestions.map((suggestion) => (
+                  <div
+                    key={suggestion.key}
+                    className="cursor-pointer border rounded p-2 hover:bg-blue-50"
+                    onClick={() => handleImageSuggestionClick(suggestion)}
+                  >
+                    <img
+                      src={suggestion.url}
+                      alt={suggestion.name}
+                      className="w-full h-16 object-cover rounded"
+                    />
+                    <p className="text-xs text-center mt-1">{suggestion.name}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
         <div>
           <label htmlFor="stock" className="block text-lg font-medium">

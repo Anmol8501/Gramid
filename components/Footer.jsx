@@ -10,8 +10,8 @@ export default function Footer() {
                         <h2 className="text-2xl font-bold">Gramid</h2>
                 </div>
                 <div className="flex flex-col md:flex-row text-lg space-y-3 md:space-y-0 md:space-x-8 text-center">
-                    <Link href="#">About Us</Link>
-                    <Link href="#">Contact Us</Link>
+                    <Link href="/about">About Us</Link>
+                    <Link href="/help">Help & Support</Link>
                     <Link href="/blog">Blog</Link>
                 </div>
                 <div className="flex flex-col items-center md:items-end mt-4 md:mt-0">
