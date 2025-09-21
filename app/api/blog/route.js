@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { dbFindAll, dbInsert } from "@lib/dbConnect";
+import { dbFind, dbInsert } from "@lib/dbConnect";
 
 export async function GET(req) {
     try {
@@ -11,8 +11,8 @@ export async function GET(req) {
             query = { category };
         }
 
-        const blogs = await dbFindAll("blogs", query);
-        return new NextResponse(JSON.stringify({ blogs: blogs.result }), { status: 200 });
+    const blogs = await dbFind("blogs", query);
+    return new NextResponse(JSON.stringify({ blogs }), { status: 200 });
 
     } catch (error) {
         console.error("Error fetching blogs:", error);

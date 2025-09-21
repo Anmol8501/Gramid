@@ -1,15 +1,14 @@
 import { NextResponse } from "next/server";
-import { dbInsert, dbFindAll } from "@lib/dbConnect";
+import { dbInsert, dbFind } from "@lib/dbConnect";
 
 
 export async function GET(req) {
   try {
 
     let query = {};
-
-    const reels = await dbFindAll("reel", query);
+    const reels = await dbFind("reel", query);
     return new NextResponse(
-      JSON.stringify({ reels: reels.result }),
+      JSON.stringify({ reels }),
       { status: 200 }
     );
   } catch (error) {
